@@ -38,4 +38,4 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           whoami
-          docker ps
+          sudo docker ps
