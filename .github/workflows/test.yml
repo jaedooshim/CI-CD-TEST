@@ -26,20 +26,16 @@ jobs:
           push: true
           tags: shimjaedoo/app:latest
 
-  build:
-    name: SSH Remote
-    runs-on: ubuntu-latest
-    steps:
-    - name: executing remote ssh commands using ssh key
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          whoami
-          sudo docker stop $(sudo docker ps -aq)
-          sudo docker container rm -f $(sudo docker container ls -aq)
-          sudo docker image rm -f $(sudo docker image ls -q)
-          sudo docker pull shimjaedoo/app:latest
-          sudo docker run -it -d -p 3000:3000 shimjaedoo/app
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            whoami
+            sudo docker stop $(sudo docker ps -aq)
+            sudo docker container rm -f $(sudo docker container ls -aq)
+            sudo docker image rm -f $(sudo docker image ls -q)
+            sudo docker pull shimjaedoo/app:latest
+            sudo docker run -it -d -p 3000:3000 shimjaedoo/app
