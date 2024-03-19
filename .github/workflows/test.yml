@@ -27,7 +27,7 @@ jobs:
           tags: shimjaedoo/app:latest
 
   build:
-    name: Build
+    name: SSH Remote
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using ssh key
@@ -37,3 +37,4 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         script: whoami
+          sudo docker ps
